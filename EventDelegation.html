@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="parent">
+        <button id="football">Football</button>
+        <button id="tennis">Tennis</button>
+        <button id="cricket">Cricket</button>
+        <button id="basketball">Basketball</button>
+    </div>
+
+    <script>
+        // Event Delegation : Its a technique of managing element by adding one event listener to the parent element and manage all the children with that event listener. Even if the children be added dynamically.
+
+        // event.target : returns the element on which the event is occurred
+        // event.target.matches("target element like div, li, p etc") : returns true if target element matches
+        // event.target.value : returns the value of target element
+        // event.target.getAttribute(attribute name) : returns the attribute name of the target element
+
+        function $(e){
+            return document.querySelector(e);
+        }
+        const parent = $(".parent");
+
+        parent.addEventListener('click', e=>{
+            const msg = e.target.getAttribute('id') + ' is clicked';
+            console.log(msg);
+            if(e.target.matches('button')){
+                e.target.style.background = "gray";
+            }
+        });
+
+        // Dynamically added element
+        const rugby = document.createElement('button');
+        rugby.innerText = "Rugby";
+        rugby.setAttribute('id', 'rugby');
+        parent.appendChild(rugby);
+
+        // Dynamically added element
+        const boxing = document.createElement('button');
+        boxing.innerText = "Boxing";
+        boxing.setAttribute('id', 'boxing');
+        parent.appendChild(boxing);
+
+     
+        
+    </script>
+</body>
+</html>

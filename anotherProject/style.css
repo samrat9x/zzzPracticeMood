@@ -1,0 +1,43 @@
+bds {
+    width: 100%;
+  }
+  
+  .wave {
+    background-image: url("data:image/svg+xml,%3Csvg width='606' height='75' viewBox='0 0 606 75' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_347_2)'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M606 45.8322C488.207 45.8322 450.75 -0.0936067 298.832 0.000143336C147.332 0.000143336 109.457 45.8322 0 45.8322V75.0001H606C606 75.0001 606 56.8166 606 45.8322Z' fill='url(%23paint0_linear_347_2)'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_347_2' x1='303' y1='-8.21911' x2='303' y2='75.0001' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23A2345C'/%3E%3Cstop offset='1' stop-color='%23A2345C'/%3E%3C/linearGradient%3E%3CclipPath id='clip0_347_2'%3E%3Crect width='606' height='75' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+    background-repeat: repeat-x;
+    animation: wave-it 4s infinite cubic-bezier(.36,.45,.63,.53);
+    z-index: 20
+  }
+  
+  .wave:nth-of-type(2) {
+    top: 5px;
+    animation: wave-it 4s infinite cubic-bezier(.36,.45,.63,.53), swell 6s ease -1.25s infinite;
+    opacity: 0.75;
+    z-index: 10;
+  }
+  
+  
+  .wave:nth-of-type(3) {
+    top: 5px;
+     background-image: url("data:image/svg+xml,%3Csvg width='606' height='75' viewBox='0 0 606 75' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_347_2)'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M606 45.8322C488.207 45.8322 450.75 -0.0936067 298.832 0.000143336C147.332 0.000143336 109.457 45.8322 0 45.8322V75.0001H606C606 75.0001 606 56.8166 606 45.8322Z' fill='url(%23paint0_linear_347_2)'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_347_2' x1='303' y1='-8.21911' x2='303' y2='75.0001' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23F1F1C6'/%3E%3Cstop offset='1' stop-color='%23F1F1C6'/%3E%3C/linearGradient%3E%3CclipPath id='clip0_347_2'%3E%3Crect width='606' height='75' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+    z-index: 1;
+    animation: wave-it 4s infinite cubic-bezier(.36,.45,.63,.53), swell 6s ease -1.25s infinite;
+  }
+  
+  @keyframes wave-it {
+    0% {
+      margin-left: 0;
+    }
+    100% {
+      margin-left: -606px;
+    }
+  }
+  
+  @keyframes swell {
+    0%, 100% {
+      transform: translate3d(0,-15px,0);
+    }
+    50% {
+      transform: translate3d(0,-5px,0);
+    }
+  }

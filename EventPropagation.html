@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background-color: rgb(229, 215, 215);
+    }
+    .div2,.div1,button{
+      padding: 20px;
+      border: 5px solid red;
+      border-radius: 15px;
+      max-width: 200px;
+      text-align: center;
+      display: block;
+      margin: 0 auto;
+      font-size: 20px;
+      font-weight: bolder;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="div2">
+    2
+    <div class="div1">
+      1
+      <button>Click</button>
+      <a href="#">Link</a>
+    </div>
+  </div>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <script>
+
+    // Event Propagation is how event travels through DOM tree
+    
+    // It has 3 phases: a) Evenet Capturing b) Target c) Event Bubbling (Default)
+    // Event Capturing: Starts from the root element and travels through the element to the Target element.
+    // Event Bubbling: Starts from the Target element and travels through the element to the root element. Its a default behavior.
+    // To activate these feature we need to add 3rd arg at the addEventListener() method to true or false. True for caturing and false for bubbling which is the default value.
+    window.addEventListener("click",function(){
+      console.log("window");
+    },false);
+    document.addEventListener("click",function(){
+      console.log("document");
+    },false);
+    document.querySelector('.div2').addEventListener("click",function(e){
+      // e.stopPropagation(); // event.stopPropagation() method stops the flow of propagation from the next try. It just let the event be occurred at first try.
+      console.log("div2");
+    },{once: true});
+    // {once: true} object let the event being occurred only once at first try. For the next try it wont be applied or it will be removed from the propagation flow. This can be used as stopPropagation() in different way.
+    // It will also be occurred synchronously at event bubbling. But at event capturing it will be occurred at the end. Lets check by changing the 3rd arg at true or false in addEventListener() method
+    document.querySelector('.div1').addEventListener("click",function(){
+      console.log("div1");
+    },false);
+    document.querySelector('button').addEventListener("click",function(e){
+      console.log(e.target.innerText = "Clicked!");
+      // event.target represents the target element on which the event is actually occurred
+    },false);
+    document.querySelector('a').addEventListener("click",function(e){
+      e.preventDefault(); // It prevents the default behavior of anchor tag. While we use a URL inside href attribute in anchor tag it ridirec
+      console.log("link is clicked");
+    },false);
+    
+  </script>
+
+
+
+</body>
+</html>
