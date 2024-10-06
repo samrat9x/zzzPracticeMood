@@ -11,5 +11,4 @@ int main(){
     printf("%0.2f\n", var3);
     // by placing numbers after decimal point makes the integers double. So by default they are 'double constant'. if you want to make them float, add the suffix 'f'
 
-    return 0;
 }
