@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-int main(){
+void main(){
     int var1 = 4/9;
     printf("%d\n", var1);
 
