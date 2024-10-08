@@ -1,7 +1,7 @@
 #include<stdio.h>
 
 void main(){
-    printf("%d",printf("%s","samrat\n"));
+    printf("%10s","samrat");
 }
 
-// Here internal printf function will return 7
+// This %10s format specifier will prepend some blanks to "samrat" which will make it 10 characters in total
