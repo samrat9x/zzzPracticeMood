@@ -3,105 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blob Object Usage Examples</title>
+    <title>Cursor Types Example</title>
+    <style>
+      /* General styling */
+      .cursor-box {
+        display: inline-block;
+        width: 200px;
+        padding: 20px;
+        margin: 10px;
+        border: 2px solid #333;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+      }
+
+      /* Different cursor types */
+      .default {
+        cursor: default;
+      }
+      .pointer {
+        cursor: pointer;
+      }
+      .crosshair {
+        cursor: crosshair;
+      }
+      .move {
+        cursor: move;
+      }
+      .text {
+        cursor: text;
+      }
+      .wait {
+        cursor: wait;
+      }
+      .help {
+        cursor: help;
+      }
+      .not-allowed {
+        cursor: not-allowed;
+      }
+      .zoom-in {
+        cursor: zoom-in;
+      }
+      .grab {
+        cursor: grab;
+      }
+      .grabbing {
+        cursor: grabbing;
+      }
+
+      /* Resize cursors */
+      .resize-n {
+        cursor: n-resize;
+      } /* Resize upwards */
+      .resize-s {
+        cursor: s-resize;
+      } /* Resize downwards */
+      .resize-e {
+        cursor: e-resize;
+      } /* Resize to the right */
+      .resize-w {
+        cursor: w-resize;
+      } /* Resize to the left */
+      .resize-ne {
+        cursor: ne-resize;
+      } /* Resize to the top-right */
+      .resize-nw {
+        cursor: nw-resize;
+      } /* Resize to the top-left */
+      .resize-se {
+        cursor: se-resize;
+      } /* Resize to the bottom-right */
+      .resize-sw {
+        cursor: sw-resize;
+      } /* Resize to the bottom-left */
+    </style>
   </head>
   <body>
-    <h1>All Types of Blob Object Usage in JavaScript</h1>
+    <h1>CSS Cursor Types Example</h1>
 
-    <h2>1. Creating a Simple Blob</h2>
-    <button onclick="createSimpleBlob()">Create Simple Blob</button>
-    <pre id="simpleBlobOutput"></pre>
+    <div class="cursor-box default">Default Cursor</div>
+    <div class="cursor-box pointer">Pointer Cursor</div>
+    <div class="cursor-box crosshair">Crosshair Cursor</div>
+    <div class="cursor-box move">Move Cursor</div>
+    <div class="cursor-box text">Text Cursor</div>
+    <div class="cursor-box wait">Wait Cursor</div>
+    <div class="cursor-box help">Help Cursor</div>
+    <div class="cursor-box not-allowed">Not Allowed Cursor</div>
+    <div class="cursor-box zoom-in">Zoom In Cursor</div>
+    <div class="cursor-box grab">Grab Cursor</div>
+    <div class="cursor-box grabbing">Grabbing Cursor</div>
 
-    <h2>2. Reading Blob Content using FileReader</h2>
-    <button onclick="readBlobContent()">Read Blob Content</button>
-    <pre id="blobContentOutput"></pre>
-
-    <h2>3. Creating an Image from Blob</h2>
-    <button onclick="createImageFromBlob()">Create Image from Blob</button>
-    <br /><br />
-    <img id="imageOutput" alt="Generated Image from Blob" />
-
-    <h2>4. Downloading Blob as a File</h2>
-    <button onclick="downloadBlob()">Download Blob as File</button>
-
-    <h2>5. Uploading Blob using XMLHttpRequest</h2>
-    <button onclick="uploadBlob()">Simulate Blob Upload</button>
-    <pre id="uploadOutput"></pre>
-
-    <script>
-      // Example 1: Creating a Simple Blob
-      function createSimpleBlob() {
-        const blob = new Blob(["Hello, this is Blob content!"], {
-          type: "text/plain",
-        });
-        document.getElementById("simpleBlobOutput").textContent =
-          JSON.stringify(blob, null, 2);
-      }
-
-      // Example 2: Reading Blob Content using FileReader
-      function readBlobContent() {
-        const blob = new Blob(["Hello, this is Blob content!"], {
-          type: "text/plain",
-        });
-
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          document.getElementById("blobContentOutput").textContent =
-            e.target.result;
-        };
-        reader.readAsText(blob);
-      }
-
-      // Example 3: Creating an Image from Blob
-      function createImageFromBlob() {
-        // Simulate a Blob from a base64-encoded image (you could fetch this from a server)
-        const base64Image =
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsSAAALEgHS3X78AAADbklEQVR42u3cMYtUZRiA8Y+JtkFb";
-        fetch(base64Image)
-          .then((res) => res.blob())
-          .then((blob) => {
-            const imageUrl = URL.createObjectURL(blob);
-            document.getElementById("imageOutput").src = imageUrl;
-          });
-      }
-
-      // Example 4: Downloading Blob as a File
-      function downloadBlob() {
-        const blob = new Blob(["This is the content of the file."], {
-          type: "text/plain",
-        });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "sample.txt";
-        link.click();
-      }
-
-      // Example 5: Uploading Blob using XMLHttpRequest
-      function uploadBlob() {
-        const blob = new Blob(["This is content for upload!"], {
-          type: "text/plain",
-        });
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://example.com/upload", true);
-
-        xhr.onload = function () {
-          if (xhr.status === 200) {
-            document.getElementById("uploadOutput").textContent =
-              "Blob uploaded successfully!";
-          } else {
-            document.getElementById("uploadOutput").textContent =
-              "Upload failed!";
-          }
-        };
-
-        xhr.onerror = function () {
-          document.getElementById("uploadOutput").textContent =
-            "Network error!";
-        };
-
-        // Simulating the upload process (Note: This will not actually upload to a server)
-        xhr.send(blob);
-      }
-    </script>
+    <!-- Resize cursor examples -->
+    <div class="cursor-box resize-n">Resize Up (n-resize)</div>
+    <div class="cursor-box resize-s">Resize Down (s-resize)</div>
+    <div class="cursor-box resize-e">Resize Right (e-resize)</div>
+    <div class="cursor-box resize-w">Resize Left (w-resize)</div>
+    <div class="cursor-box resize-ne">Resize Top-Right (ne-resize)</div>
+    <div class="cursor-box resize-nw">Resize Top-Left (nw-resize)</div>
+    <div class="cursor-box resize-se">Resize Bottom-Right (se-resize)</div>
+    <div class="cursor-box resize-sw">Resize Bottom-Left (sw-resize)</div>
   </body>
 </html>
