@@ -1,10 +1,11 @@
 #include<stdio.h>
 
 void main(){
-    char c = 255;
-    printf("%d\n",c);
-    c = c + 10;
-    printf("%d",c);
+    signed int i;
+    signed j;
+    unsigned k;
+    long l;
+    long int m;
+    long long n;
+    printf("%d,%d,%d,%d,%d,%d",i,j,k,l,m,n);
 }
-
-// Here c is signed character and a character typically can consume 8bits. So it overflows the range and 255 is equivalent to -1 (using 2's complement). So c is -1.
