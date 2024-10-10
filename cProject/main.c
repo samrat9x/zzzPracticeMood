@@ -1,9 +1,9 @@
 #include<stdio.h>
-#include<conio.h>
+// #include<conio.h>
 extern int var;
 int main(){
 
     printf("%d", var);
-    getch();
+    // getch();
     return 0;
 }
