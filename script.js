@@ -6,14 +6,18 @@ const memo = (func) => {
   let cache = {};
   return function (x) {
     if (cache[x]) {
-      return cache[x];
+      return "cached result: " + cache[x];
     } else {
       const result = func(x);
       cache[x] = result;
-      return cache[x];
+      return "new calculated result: " + cache[x];
     }
   };
 };
 
 const calc = memo(add);
 console.log(calc(10));
+console.log(calc(10));
+console.log(calc(10));
+console.log(calc(30));
+console.log(calc(30));
