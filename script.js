@@ -1,23 +1,16 @@
-function add(x) {
-  return 10 + x;
-}
+abu();
 
-const memo = (func) => {
-  let cache = {};
-  return function (x) {
-    if (cache[x]) {
-      return "cached result: " + cache[x];
-    } else {
-      const result = func(x);
-      cache[x] = result;
-      return "new calculated result: " + cache[x];
-    }
-  };
+var abu = () => {
+  console.log("first");
 };
 
-const calc = memo(add);
-console.log(calc(10));
-console.log(calc(10));
-console.log(calc(10));
-console.log(calc(30));
-console.log(calc(30));
+abu();
+
+function abu() {
+  console.log("second");
+}
+
+abu();
+
+let arr = [1, 3, [5, 6]];
+console.log(arr.flat());
