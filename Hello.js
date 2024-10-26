@@ -1,21 +1,17 @@
+const arr = ["samrat", "anaBuby", "valobasabasi", "babykothakar"];
+function mapSam(arr, func) {
+  let newArr = [];
 
+  for (var i in arr) {
+    newArr.push(func(arr[i]));
+  }
 
-        function debounce(myFunc, delay){
-            let timeOutId;
-            return function(){
-                if(timeOutId){
-                    console.log(timeOutId)
-                    clearTimeout(timeOutId);
-                }
-                timeOutId = setTimeout(e=>{
-                    myFunc()
-                },delay);
+  return newArr;
+}
 
-                console.log(timeOutId);
-                
-            }
-        }
+function myFunc(lang) {
+  return lang.length;
+}
 
-       let hello = debounce(function(){console.log("hello")},2000);
-        hello();
-        hello();
+const hello = mapSam(arr, myFunc);
+console.log(hello);
