@@ -14,7 +14,11 @@ button.onclick = () => {
   let m2 = today.getMonth() + 1;
   let y2 = today.getFullYear();
 
-  let d3 = d2 - d1;
-  let m3 = m2 - m1;
-  let y3 = y2 - y1;
+  let d3, m3, y3;
+  y3 = y2 - y1;
+
+  if (m2 >= m1) {
+  } else {
+    y3--;
+  }
 };
