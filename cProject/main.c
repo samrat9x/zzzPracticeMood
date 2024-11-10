@@ -4,5 +4,5 @@ int main(){
 
     printf("%d", var);
   
-    return 0;
+    return  0;
 }
