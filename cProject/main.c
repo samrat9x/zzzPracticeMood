@@ -1,7 +1,6 @@
 #include<stdio.h>
+  extern int var = 9;
 int main(){
-    int var = 9;
-    extern int var;
     printf("%d", var);
     return  0;
 }
