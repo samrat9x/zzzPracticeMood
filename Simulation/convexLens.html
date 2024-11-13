@@ -139,7 +139,7 @@
 
         // Draw rays from the object to the lens and beyond
         ctx.setLineDash([2, 3]);
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = "#888";
 
         // Ray 1: From the top of the object parallel to the principal axis, refracted through far focal point
         ctx.beginPath();
@@ -159,7 +159,7 @@
 
         // Draw the red dotted line dividing the lens into two parts (through the pole)
         ctx.setLineDash([2, 3]); // Dotted line
-        ctx.strokeStyle = "#ff0000"; // Red color
+        ctx.strokeStyle = "#888"; // Red color
         ctx.beginPath();
         ctx.moveTo(lensCenter, canvas.height / 2 - 100); // Top of the lens
         ctx.lineTo(lensCenter, canvas.height / 2 + 100); // Bottom of the lens

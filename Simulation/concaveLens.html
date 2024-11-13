@@ -68,8 +68,8 @@
       const objectSlider = document.getElementById("objectPosition");
 
       const lensCenter = canvas.width / 2;
-      const focalLength = 100; // Focal length of the lens
-      const objectHeight = 50; // Height of the object arrow
+      const focalLength = 100;
+      const objectHeight = 50;
 
       function drawScene() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -81,26 +81,35 @@
         ctx.lineTo(canvas.width, canvas.height / 2);
         ctx.stroke();
 
-        // Draw concave lens (thinner in the middle)
+        // Draw biconcave lens (curves outward on both sides)
         ctx.strokeStyle = "#00f";
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(lensCenter - 10, canvas.height / 2 - 100);
+        ctx.moveTo(lensCenter - 20, canvas.height / 2 - 100);
         ctx.quadraticCurveTo(
-          lensCenter,
-          canvas.height / 2 - 70,
-          lensCenter + 10,
-          canvas.height / 2 - 100
-        );
-        ctx.lineTo(lensCenter + 10, canvas.height / 2 + 100);
-        ctx.quadraticCurveTo(
-          lensCenter,
-          canvas.height / 2 + 70,
-          lensCenter - 10,
+          lensCenter + 5,
+          canvas.height / 2,
+          lensCenter - 20,
           canvas.height / 2 + 100
+        );
+        ctx.lineTo(lensCenter + 20, canvas.height / 2 + 100);
+        ctx.quadraticCurveTo(
+          lensCenter - 5,
+          canvas.height / 2,
+          lensCenter + 20,
+          canvas.height / 2 - 100
         );
         ctx.closePath();
         ctx.stroke();
+
+        // Draw dotted line through the lens center to separate lens parts
+        ctx.setLineDash([2, 3]);
+        ctx.strokeStyle = "#888";
+        ctx.beginPath();
+        ctx.moveTo(lensCenter, canvas.height / 2 - 100);
+        ctx.lineTo(lensCenter, canvas.height / 2 + 100);
+        ctx.stroke();
+        ctx.setLineDash([]); // Reset line dash
 
         // Draw focal points
         ctx.fillStyle = "#f00";
@@ -120,7 +129,7 @@
         ctx.lineTo(objectX + 10, canvas.height / 2 - objectHeight + 10);
         ctx.stroke();
 
-        // Calculate virtual image position using lens formula (for concave, image distance is negative)
+        // Calculate virtual image position
         const distanceObject = lensCenter - objectX;
         const distanceImage =
           (focalLength * distanceObject) / (focalLength - distanceObject);
@@ -132,14 +141,22 @@
         ctx.beginPath();
         ctx.moveTo(imageX, canvas.height / 2);
         ctx.lineTo(imageX, canvas.height / 2 - imageHeight);
-        ctx.lineTo(imageX - 10, canvas.height / 2 - imageHeight - 10);
-        ctx.moveTo(imageX, canvas.height / 2 - imageHeight);
-        ctx.lineTo(imageX + 10, canvas.height / 2 - imageHeight - 10);
+
+        if (distanceImage < 0) {
+          ctx.lineTo(imageX - 10, canvas.height / 2 - imageHeight - 10);
+          ctx.moveTo(imageX, canvas.height / 2 - imageHeight);
+          ctx.lineTo(imageX + 10, canvas.height / 2 - imageHeight - 10);
+        } else {
+          ctx.lineTo(imageX - 10, canvas.height / 2 - imageHeight + 10);
+          ctx.moveTo(imageX, canvas.height / 2 - imageHeight);
+          ctx.lineTo(imageX + 10, canvas.height / 2 - imageHeight + 10);
+        }
+
         ctx.stroke();
 
         // Draw rays diverging from the object through the lens
         ctx.setLineDash([2, 3]);
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = "#888";
 
         // Ray 1: From the top of the object parallel to the principal axis, appears to diverge from near focal point
         ctx.beginPath();
@@ -159,10 +176,7 @@
         ctx.setLineDash([]);
       }
 
-      // Update the scene whenever the object position changes
       objectSlider.addEventListener("input", drawScene);
-
-      // Initial draw
       drawScene();
     </script>
   </body>
