@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convex Lens Interactive Demo</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      canvas {
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      }
+      .controls {
+        margin: 20px;
+      }
+      input[type="range"] {
+        width: 100%;
+        max-width: 500px;
+        margin: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        height: 8px;
+        background: #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: background 0.2s ease-in-out;
+      }
+      input[type="range"]:hover {
+        background: #bbb;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+      }
+      input[type="range"]::-ms-thumb {
+        width: 20px;
+        height: 20px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Convex Lens Interactive Demo</h2>
+    <canvas id="lensCanvas" width="800" height="400"></canvas>
+    <div class="controls">
+      <label>Object Position: </label>
+      <input type="range" id="objectPosition" min="150" max="390" value="150" />
+    </div>
+
+    <script>
+      const canvas = document.getElementById("lensCanvas");
+      const ctx = canvas.getContext("2d");
+      const objectSlider = document.getElementById("objectPosition");
+
+      const lensCenter = canvas.width / 2;
+      const focalLength = 100; // Distance of the focal points from the lens
+      const objectHeight = 50; // Height of the object arrow
+
+      function drawScene() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw principal axis
+        ctx.strokeStyle = "#000";
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+
+        // Draw convex lens
+        ctx.strokeStyle = "#00f";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.ellipse(lensCenter, canvas.height / 2, 10, 100, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Draw focal points
+        ctx.fillStyle = "#f00";
+        ctx.beginPath();
+        ctx.arc(lensCenter - focalLength, canvas.height / 2, 5, 0, Math.PI * 2);
+        ctx.arc(lensCenter + focalLength, canvas.height / 2, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw object (as an arrow)
+        const objectX = parseInt(objectSlider.value);
+        ctx.strokeStyle = "#008000";
+        ctx.beginPath();
+        ctx.moveTo(objectX, canvas.height / 2);
+        ctx.lineTo(objectX, canvas.height / 2 - objectHeight);
+        ctx.lineTo(objectX - 10, canvas.height / 2 - objectHeight + 10);
+        ctx.moveTo(objectX, canvas.height / 2 - objectHeight);
+        ctx.lineTo(objectX + 10, canvas.height / 2 - objectHeight + 10);
+        ctx.stroke();
+
+        // Calculate image position using lens formula
+        const distanceObject = lensCenter - objectX;
+        const distanceImage =
+          (focalLength * distanceObject) / (distanceObject - focalLength);
+        const imageX = lensCenter + distanceImage;
+
+        // Draw image (as an arrow, inverted if needed)
+        ctx.strokeStyle = "#ff00ff";
+        const imageHeight = (-objectHeight * distanceImage) / distanceObject;
+        ctx.beginPath();
+        ctx.moveTo(imageX, canvas.height / 2);
+        ctx.lineTo(imageX, canvas.height / 2 - imageHeight);
+        ctx.lineTo(
+          imageX - 10,
+          canvas.height / 2 - imageHeight + Math.sign(imageHeight) * 10
+        );
+        ctx.moveTo(imageX, canvas.height / 2 - imageHeight);
+        ctx.lineTo(
+          imageX + 10,
+          canvas.height / 2 - imageHeight + Math.sign(imageHeight) * 10
+        );
+        ctx.stroke();
+
+        // Draw rays from the object to the lens and beyond
+        ctx.setLineDash([5, 5]);
+        ctx.strokeStyle = "#FFA500";
+
+        // Ray 1: From the top of the object parallel to the principal axis, refracted through far focal point
+        ctx.beginPath();
+        ctx.moveTo(objectX, canvas.height / 2 - objectHeight);
+        ctx.lineTo(lensCenter, canvas.height / 2 - objectHeight);
+        ctx.lineTo(imageX, canvas.height / 2 - imageHeight);
+        ctx.stroke();
+
+        // Ray 2: From the top of the object through the center of the lens, dotted line extending to image head
+        ctx.beginPath();
+        ctx.moveTo(objectX, canvas.height / 2 - objectHeight);
+        ctx.lineTo(lensCenter, canvas.height / 2);
+        ctx.lineTo(imageX, canvas.height / 2 - imageHeight);
+        ctx.stroke();
+
+        ctx.setLineDash([]); // Reset line dash for other elements
+
+        // Draw the red dotted line dividing the lens into two parts (through the pole)
+        ctx.setLineDash([5, 5]); // Dotted line
+        ctx.strokeStyle = "#ff0000"; // Red color
+        ctx.beginPath();
+        ctx.moveTo(lensCenter, canvas.height / 2 - 100); // Top of the lens
+        ctx.lineTo(lensCenter, canvas.height / 2 + 100); // Bottom of the lens
+        ctx.stroke();
+        ctx.setLineDash([]); // Reset line dash for other elements
+      }
+
+      // Update the scene whenever the object position changes
+      objectSlider.addEventListener("input", drawScene);
+
+      // Initial draw
+      drawScene();
+    </script>
+  </body>
+</html>

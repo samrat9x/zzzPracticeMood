@@ -1,9 +1,7 @@
 #include<stdio.h>
-#include<conio.h>
-extern int var;
 int main(){
-
+    int var = 9;
+    extern int var;
     printf("%d", var);
-    getch();
     return  0;
 }
