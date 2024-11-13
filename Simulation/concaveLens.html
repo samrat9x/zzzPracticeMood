@@ -132,8 +132,8 @@
         // Calculate virtual image position
         const distanceObject = lensCenter - objectX;
         const distanceImage =
-          (focalLength * distanceObject) / (focalLength - distanceObject);
-        const imageX = lensCenter + distanceImage;
+          (focalLength * distanceObject) / (focalLength + distanceObject);
+        const imageX = lensCenter - distanceImage;
 
         // Draw virtual image (inverted arrow, smaller size)
         ctx.strokeStyle = "#ff00ff";
