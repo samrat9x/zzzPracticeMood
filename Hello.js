@@ -1,3 +1,11 @@
-var a = 5;
-a = 6;
-console.log(5);
+// const os = require("os");
+// console.log(os.platform());
+// console.log(os.release());
+// console.log(os.homedir());
+// console.log(os.hostname());
+// console.log(os.cpus());
+
+const fs = require("fs");
+fs.readFile("ajax", (err, data) => {
+  console.log(data);
+});
