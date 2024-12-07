@@ -1,6 +1,12 @@
 #include<stdio.h>
-  extern int var = 9;
+conio
+
 int main(){
-    printf("%d", var);
-    return  0;
+  int value;
+  value = increment();
+  value = increment();
+  value = increment();
+
+  printf("%d", value);
+  return 0;
 }
