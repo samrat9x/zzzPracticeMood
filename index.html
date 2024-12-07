@@ -3,14 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Display Date</title>
     <style>
-      #svg1 {
-        width: 100px;
-        background-color: black;
-        height: 100px;
+      #date-container {
+        font-size: 1.5rem;
+        color: #333;
+        text-align: center;
+        padding: 10px;
+        border: 2px solid #007bff;
+        border-radius: 8px;
+        width: 200px;
+        margin: 20px auto;
+        background-color: #f8f9fa;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <div id="date-container">Loading date...</div>
+
+    <script>
+      // JavaScript to display only the date
+      const dateContainer = document.getElementById("date-container");
+      const today = new Date();
+
+      // Format: DD/MM/YYYY
+      const formattedDate = `${today.getDate()}/${
+        today.getMonth() + 1
+      }/${today.getFullYear()}`;
+      dateContainer.textContent = formattedDate;
+    </script>
+  </body>
 </html>
